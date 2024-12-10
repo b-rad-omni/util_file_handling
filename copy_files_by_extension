@@ -1,0 +1,23 @@
+import os
+import shutil
+
+def copy_files_by_extension(source_dir, dest_dir, extension):
+    """
+    Copies all files with a given extension from the source directory to the destination directory.
+
+    Parameters:
+        source_dir (str): The directory to search for files.
+        dest_dir (str): The directory to copy files into.
+        extension (str): The file extension to search for (e.g., ".txt").
+    """
+    if not os.path.exists(dest_dir):
+        os.makedirs(dest_dir)
+
+    for root, _, files in os.walk(source_dir):
+        for file in files:
+            if file.endswith(extension):
+                shutil.copy(os.path.join(root, file), dest_dir)
+                print(f"Copied: {file}")
+
+# Example usage
+copy_files_by_extension("source_folder", "destination_folder", ".txt")
